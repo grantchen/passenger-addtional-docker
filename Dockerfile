@@ -23,17 +23,16 @@ RUN sudo make install
 # install stunserver
 RUN sudo apt-get update
 RUN sudo apt-get install libboost-dev -y
-ADD lib/stunserver-1.2.9.tgz /tmp/stunserver-1.2.9.tgz
-WORKDIR /tmp/stunserver-1.2.9.tgz/stunserver
+ADD lib/stunserver-1.2.9.tgz /home/app/stunserver-1.2.9.tgz
+WORKDIR /home/app/stunserver-1.2.9.tgz/stunserver
 RUN make
 RUN sudo cp stunserver /usr/sbin/stunserver
 ADD config/stuntman-server/stuntman-server /etc/init.d/stuntman-server
 RUN sudo chmod +x /etc/init.d/stuntman-server
 RUN sudo service stuntman-server start
 
-
 # Install signalmaster:
-WORKDIR /tmp
+WORKDIR /home/app
 RUN git clone https://github.com/andyet/signalmaster.git
-WORKDIR /tmp/signalmaster
+WORKDIR /home/app/signalmaster
 RUN npm install async node-uuid redis underscore precommit-hook getconfig yetify socket.io
