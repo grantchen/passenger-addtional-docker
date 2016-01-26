@@ -34,8 +34,10 @@ RUN sudo service stuntman-server start
 # Install signalmaster:
 WORKDIR /home/app
 RUN git clone https://github.com/andyet/signalmaster.git
+ADD config/signalmaster/package.json /home/app/signalmaster/package.json
 WORKDIR /home/app/signalmaster
-RUN npm install async node-uuid redis underscore precommit-hook getconfig yetify socket.io
+RUN npm install
+
 
 # install pdfinfo
 RUN sudo apt-get install poppler-utils -y
