@@ -37,7 +37,7 @@ RUN git clone https://github.com/andyet/signalmaster.git
 ADD config/signalmaster/package.json /home/app/signalmaster/package.json
 WORKDIR /home/app/signalmaster
 RUN npm install
-
+RUN npm install
 
 # install pdfinfo
 RUN sudo apt-get install poppler-utils -y
