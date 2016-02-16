@@ -41,3 +41,7 @@ RUN npm install
 
 # install pdfinfo
 RUN sudo apt-get install poppler-utils -y
+
+# install postgres
+RUN sudo apt-get install postgresql
+RUN sudo apt-get install redis-tools
