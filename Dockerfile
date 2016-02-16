@@ -43,5 +43,5 @@ RUN npm install
 RUN sudo apt-get install poppler-utils -y
 
 # install postgres
-RUN sudo apt-get install postgresql
-RUN sudo apt-get install redis-tools
+RUN sudo apt-get install postgresql -y
+RUN sudo apt-get install redis-tools -y
