@@ -43,5 +43,12 @@ RUN npm install
 RUN sudo apt-get install poppler-utils -y
 
 # install postgres
-RUN sudo apt-get install postgresql -y
+WORKDIR /tmp
+ADD lib/postgresql-9.5.0.tar.gz /tmp/postgresql-9.5.0.tar.gz
+WORKDIR /tmp/postgresql-9.5.0.tar.gz/postgresql-9.5.0
+RUN chmod +x configure
+RUN ./configure --without-readline
+RUN make
+RUN sudo make install
+
 RUN sudo apt-get install redis-tools -y
