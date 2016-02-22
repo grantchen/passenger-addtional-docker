@@ -50,5 +50,7 @@ RUN chmod +x configure
 RUN ./configure --without-readline
 RUN make
 RUN sudo make install
+RUN echo "PATH=/usr/local/pgsql/bin:$PATH" >> ~/.profile
+RUN echo "export PATH" >> ~/.profile
 
 RUN sudo apt-get install redis-tools -y
