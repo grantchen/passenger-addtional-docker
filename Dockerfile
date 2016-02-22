@@ -1,5 +1,14 @@
 FROM phusion/passenger-ruby22
 
+
+# install postgres
+ADD config/postgresql.list /etc/apt/sources.list.d/postgresql.list
+RUN sudo apt-get update
+RUN sudo apt-get install wget -y
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+RUN sudo apt-get update
+RUN sudo apt-get install postgresql-9.5 -y
+
 # install imagemagick
 WORKDIR /tmp
 ADD lib/ImageMagick-6.9.3-0.tar.gz /tmp/ImageMagick-6.9.3-0.tar.gz
@@ -42,16 +51,6 @@ RUN npm install
 # install pdfinfo
 RUN sudo apt-get install poppler-utils -y
 
-# install postgres
-WORKDIR /tmp
-ADD lib/postgresql-9.5.0.tar.gz /tmp/postgresql-9.5.0.tar.gz
-WORKDIR /tmp/postgresql-9.5.0.tar.gz/postgresql-9.5.0
-RUN chmod +x configure
-RUN ./configure --without-readline
-RUN make
-RUN sudo make install
-RUN echo "PATH=/usr/local/pgsql/bin:$PATH" >> ~/.profile
-RUN echo "export PATH" >> ~/.profile
-RUN source ~/.profile
+
 
 RUN sudo apt-get install redis-tools -y
